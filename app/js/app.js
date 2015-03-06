@@ -13,7 +13,7 @@ angular.module('myApp', [
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
-  $routeProvider.when('/add-expense', {templateUrl:'partials/add-expenses.html', controller: 'AddExpenseCtrl'});
+  $routeProvider.when('/add-food', {templateUrl:'partials/add-food.html', controller: 'AddFoodCtrl'});
   $routeProvider.when('/view-summary', {templateUrl:'partials/view-summary.html', controller: 'ViewSummaryCtrl'});
  $routeProvider.otherwise({redirectTo: '/'});
 }]);

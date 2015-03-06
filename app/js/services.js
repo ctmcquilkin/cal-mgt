@@ -6,28 +6,28 @@
 // In this case it is a simple value service.
 angular.module('myApp.services', [])
   .value('version', '0.1')
-  .value('categoryList',["Food", "Fuel", "Grocery", "Entertainment"])
+  .value('categoryList',["Fat", "Carbs", "Sugar", "Protien"])
   .factory('expService', [function() {
-    var prefix = 'exp-mgr';
+    var prefix = 'cal-mgr';
     return {
-      saveExpense: function(data) {
+      saveFood: function(data) {
         var timeStamp = Math.round(new Date().getTime());
         var key = prefix + timeStamp;
         data = JSON.stringify(data);
         localStorage[key] = data;
       },
-      getExpense: function() {
-        var expenses = [];
+      getFood: function() {
+        var foods = [];
         var prefixLength = prefix.length;
         Object.keys(localStorage)
           .forEach(function(key) {
              if (key.substring(0, prefixLength) == prefix) {
                var item = window.localStorage[key];
                item = JSON.parse(item);
-               expenses.push(item);
+               foods.push(item);
              }
           });
-        return expenses;
+        return foods;
       },
       getCategoryTotal: function(category) {
         var categoryTotal = 0;

@@ -8,15 +8,15 @@ angular.module('myApp.controllers', [])
 
         }
     ])
-    .controller('AddExpenseCtrl', ['$scope', 'categoryList', 'expService', function($scope, categoryList, expService) {
+    .controller('AddFoodCtrl', ['$scope', 'categoryList', 'expService', function($scope, categoryList, expService) {
             $scope.categories = categoryList;
             $scope.submit = function() {
-              expService.saveExpense($scope.expense);
+              expService.saveFood($scope.expense);
         };
         }
     ])
   .controller('ViewSummaryCtrl', ['$scope','expService','categoryList',function($scope,expService,categoryList) {
-      $scope.expenses = expService.getExpense();
+      $scope.expenses = expService.getFood();
 
       $scope.summaryData = [];
 
@@ -38,7 +38,7 @@ categoryList.forEach(function(item) {
         
   
 var navigator=function(incrementer){
-var pages=['/','/add-expense','/view-summary'];
+var pages=['/','/add-food','/view-summary'];
 
         var nextUrl="";
         var currentPage = $location.path();
