@@ -7,7 +7,7 @@
 angular.module('myApp.services', [])
   .value('version', '0.1')
   .value('categoryList',["Fat", "Carbs", "Sugar", "Protien"])
-  .factory('expService', [function() {
+  .factory('calService', [function() {
     var prefix = 'cal-mgr';
     return {
       saveFood: function(data) {
