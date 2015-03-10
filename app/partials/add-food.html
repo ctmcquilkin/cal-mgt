@@ -1,5 +1,8 @@
+<div class="sw4_notify">
+  <alert ng-repeat="alert in alerts" type="alert.type" class="alert alert-{{alert.type}}">{{ alert.msg }} <button type="button" class="close" ng-click="closeAlert($index)"><span aria-hidden="true">&times;</span></button></alert>
+</div>
 <h2>Add Food</h2>
-<form id='addForm' name='addForm' novalidate >
+<form ng-submit='submit()' id='addForm' name='addForm' novalidate >
     <label>Category:</label>
     <select ng-model='food.category' ng-options='category for category in categories'>
     
@@ -7,5 +10,5 @@
     <input type='number' ng-model='food.amount'></input>
     <label>Description:</label>
     <input type='text' ng-pattern="/^[a-zA-Z 0-9]*$/" ng-model='food.description'></input>
-    <button ng-disabled="addForm.$pristine || addForm.$dirty && addForm.$invalid"ng-click='submit()'>Submit</button>
+    <input type='submit' value='Submit' ng-disabled="addForm.$pristine || addForm.$dirty && addForm.$invalid">
 </form>

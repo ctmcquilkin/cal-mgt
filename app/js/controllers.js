@@ -8,11 +8,15 @@ angular.module('myApp.controllers', [])
 
         }
     ])
-    .controller('AddFoodCtrl', ['$scope', 'categoryList', 'calService', function($scope, categoryList, calService) {
+    .controller('AddFoodCtrl', ['$scope', 'categoryList', 'calService', 'alertService', function($scope, categoryList, calService, alertService) {
             $scope.categories = categoryList;
             $scope.submit = function() {
-              calService.saveFood($scope.food);
-        };
+            	calService.saveFood($scope.food);
+				//alertService.add("danger", "Error: Something went wrong! ", 3000);
+				// use Promises or try-catch blocks to indentify if the data was saved or not.
+				alertService.add("success", $scope.food.description + " saved successfully! ", 3000);
+				$scope.addForm.$setPristine(); // not working. Don't know why
+        	};
         }
     ])
   .controller('ViewSummaryCtrl', ['$scope','calService','categoryList',function($scope,calService,categoryList) {
@@ -28,6 +32,11 @@ angular.module('myApp.controllers', [])
 				});
 
 			});
+		$scope.remove = function() {
+        		var index = $scope.summaryData.indexOf(item)
+    			$scope.summaryData.splice(index, 1);
+    			//localStorage.removeItem(key);    Remove item from localStorage
+        };
     }
   ])
   .controller('NavigationCtrl',['$scope','$location',function($scope,$location){
