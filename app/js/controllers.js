@@ -13,7 +13,6 @@ angular.module('myApp.controllers', [])
             $scope.submit = function() {
             	calService.saveFood($scope.food);
 				//alertService.add("danger", "Error: Something went wrong! ", 3000);
-				// use Promises or try-catch blocks to indentify if the data was saved or not.
 				alertService.add("success", $scope.food.description + " saved successfully! ", 3000);
 				$scope.addForm.$setPristine(); // not working. Don't know why
         	};
@@ -25,19 +24,28 @@ angular.module('myApp.controllers', [])
 		
 		categoryList.forEach(function(item) {
 				var catTotal = calService.getCategoryTotal(item);
-
 				$scope.summaryData.push({
 					category: item,
 					amount: catTotal
 				});
-
-			});
-		$scope.remove = function() {
-        		var index = $scope.summaryData.indexOf(item)
-    			$scope.summaryData.splice(index, 1);
-    			//localStorage.removeItem(key);    Remove item from localStorage
+		});
+		$scope.remove = function(food) {
+        		var index = $scope.foods.indexOf(food);
+        		var prefix = 'cal-mgr';
+        		var prefixLength = prefix.length;
+    			$scope.foods.splice(index, 1);
+    			Object.keys(localStorage)
+				  .forEach(function(key) {
+					if (key.substring(0, prefixLength) == prefix) {
+					  var item = localStorage[key]
+					  item = JSON.parse(item)
+					  if (item.description == food.description) {
+						localStorage.removeItem(key);
+					  }
+					}
+				  });
         };
-    }
+    } 
   ])
   .controller('NavigationCtrl',['$scope','$location',function($scope,$location){
 		var navigator=function(incrementer){
