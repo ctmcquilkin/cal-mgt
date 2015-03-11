@@ -16,6 +16,19 @@ angular.module('myApp.services', [])
         data = JSON.stringify(data);
         localStorage[key] = data;
       },
+      deleteFood: function(description) {
+        	var prefixLength = prefix.length;
+			Object.keys(localStorage)
+		  .forEach(function(key) {
+			if (key.substring(0, prefixLength) == prefix) {
+			  var item = localStorage[key]
+			  item = JSON.parse(item)
+			  if (item.description == description) {
+				localStorage.removeItem(key);
+			  }
+			}
+		  });
+      },
       getFood: function() {
         var foods = [];
         var prefixLength = prefix.length;
