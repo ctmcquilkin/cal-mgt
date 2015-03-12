@@ -12,14 +12,6 @@ angular.module('myApp.controllers', [])
             $scope.categories = categoryList;
             $scope.submit = function() {
             	calService.saveFood($scope.food);
-            	// use Promises or try-catch blocks to identify if the data was saved or not. Promise example:
-// 				return $http.save('/api/todos/' + todo.id)
-// 					.then(function success() {
-// 					return store.todos;
-// 					}, function error() {
-// 					angular.copy(originalTodos, store.todos);
-// 					return originalTodos;
-// 				});
 				//alertService.add("danger", "Error: Something went wrong! ", 3000);
 				alertService.add("success", $scope.food.description + " saved successfully! ", 3000);
 				$scope.food.category = '';
@@ -40,10 +32,24 @@ angular.module('myApp.controllers', [])
 					amount: catTotal
 				});
 		});
+		function updateCatTotal( cat, value ) {
+		   for (var i in $scope.summaryData) {
+// 		   	 console.log($scope.summaryData[i].category);
+// 		   	 console.log($scope.summaryData[i].amount);
+// 			 console.log(cat);
+// 			 console.log(value);
+			 if ($scope.summaryData[i].category === cat) {
+				$scope.summaryData[i].amount -= value;
+				$scope.$digest();
+				break;
+			 }
+		   }
+		}
 		$scope.remove = function(food) {
         		var index = $scope.foods.indexOf(food);
     			$scope.foods.splice(index, 1);
 				calService.deleteFood(food.description);
+				updateCatTotal(food.category, food.amount);
         };
     } 
   ])
