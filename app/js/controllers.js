@@ -2,55 +2,72 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', [])
+angular.module('myApp.controllers', ['ngResource'])
     .controller('HomeCtrl', ['$scope',
         function($scope) {
 
         }
     ])
-    .controller('AddFoodCtrl', ['$scope', 'categoryList', 'calService', 'alertService', function($scope, categoryList, calService, alertService) {
-            $scope.categories = categoryList;
-            $scope.submit = function() {
-            	calService.saveFood($scope.food);
-				//alertService.add("danger", "Error: Something went wrong! ", 3000);
-				alertService.add("success", $scope.food.description + " saved successfully! ", 3000);
-				$scope.food.category = '';
-				$scope.food.amount = '';
-				$scope.food.description = '';
-				$scope.addForm.$setPristine();
-        	};
-        }
-    ])
-  .controller('ViewSummaryCtrl', ['$scope','calService','categoryList',function($scope,calService,categoryList) {
-		$scope.foods = calService.getFood();
-		$scope.summaryData = [];
+    .controller('AddFoodCtrl', ['Foods', function(Foods) {
+      var self = this;
+      self.items = [];
+      self.newFoodItem = {};
+      var fetchFoodItems = function() {
+        self.items = Foods.query();
+      };
+
+      fetchFoodItems();
+
+      self.done = function(food) {
+        Foods.markAsDone(food, function(foods) {
+          self.items = foods;
+        });
+      };
+
+      self.add = function() {
+        Foods.save(self.newFoodItem).$promise
+            .then(fetchFoodItems)
+            .then(function() {
+              self.newTodo = {};
+            });
+      };
+
+    }])
+  .controller('ViewSummaryCtrl', ['$scope','Foods','categoryList',function($scope, Foods,categoryList) {
+// 		$scope.foods = calService.getFood();
+		$scope.summaryData = [
+			{ category: "Fat", amount: 180 },
+			{ category: "Carbs", amount: 250 },
+			{ category: "Sugar", amount: 80 },
+			{ category: "Protein", amount: 350 }
+		];
 		
-		categoryList.forEach(function(item) {
-				var catTotal = calService.getCategoryTotal(item);
-				$scope.summaryData.push({
-					category: item,
-					amount: catTotal
-				});
-		});
-		function updateCatTotal( cat, value ) {
-		   for (var i in $scope.summaryData) {
-// 		   	 console.log($scope.summaryData[i].category);
-// 		   	 console.log($scope.summaryData[i].amount);
-// 			 console.log(cat);
-// 			 console.log(value);
-			 if ($scope.summaryData[i].category === cat) {
-				$scope.summaryData[i].amount -= value;
-				$scope.$digest();
-				break;
-			 }
-		   }
-		}
-		$scope.remove = function(food) {
-        		var index = $scope.foods.indexOf(food);
-    			$scope.foods.splice(index, 1);
-				calService.deleteFood(food.description);
-				updateCatTotal(food.category, food.amount);
-        };
+// 		categoryList.forEach(function(item) {
+// 				var catTotal = calService.getCategoryTotal(item);
+// 				$scope.summaryData.push({
+// 					category: item,
+// 					amount: catTotal
+// 				});
+// 		});
+// 		function updateCatTotal( cat, value ) {
+// 		   for (var i in $scope.summaryData) {
+// // 		   	 console.log($scope.summaryData[i].category);
+// // 		   	 console.log($scope.summaryData[i].amount);
+// // 			 console.log(cat);
+// // 			 console.log(value);
+// 			 if ($scope.summaryData[i].category === cat) {
+// 				$scope.summaryData[i].amount -= value;
+// 				$scope.$digest();
+// 				break;
+// 			 }
+// 		   }
+// 		}
+// 		$scope.remove = function(food) {
+//         		var index = $scope.foods.indexOf(food);
+//     			$scope.foods.splice(index, 1);
+// 				calService.deleteFood(food.description);
+// 				updateCatTotal(food.category, food.amount);
+//         };
     } 
   ])
   .controller('NavigationCtrl',['$scope','$location',function($scope,$location){

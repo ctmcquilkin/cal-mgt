@@ -1,14 +1,32 @@
+<!-- 
 <div class="sw4_notify">
   <alert ng-repeat="alert in alerts" type="alert.type" class="alert alert-{{alert.type}}">{{ alert.msg }} <button type="button" class="close" ng-click="closeAlert($index)"><span aria-hidden="true">&times;</span></button></alert>
 </div>
-<h2>Add Food</h2>
-<form ng-submit='submit()' id='addForm' name='addForm' novalidate >
-    <label>Category:</label>
-    <select ng-model='food.category' ng-options='category for category in categories'>
-    
-    <label>Amount:</label>
-    <input type='number' ng-model='food.amount'></input>
-    <label>Description:</label>
-    <input type='text' ng-pattern="/^[a-zA-Z 0-9]*$/" ng-model='food.description'></input>
-    <input type='submit' value='Submit' ng-disabled="addForm.$pristine || addForm.$dirty && addForm.$invalid">
-</form>
+ -->
+<div ng-controller="AddFoodCtrl as AddFoodCtrl">
+  <h2>Add Food</h2>
+  <div ng-repeat="food in AddFoodCtrl.items"
+       class="exp-details">
+    <div class="col-sm-3">description: <span ng-bind="food.description"></span></div>
+    <div class="col-sm-2">calories: <span ng-bind="food.calories"></span></div>
+    <div class="col-sm-1"><button ng-click="AddFoodCtrl.done(food)">DONE</button></div>
+  </div>
+  <br>
+  <br>
+  <div>
+    <form name="addForm"
+          ng-submit="AddFoodCtrl.add()">
+      <input type="text"
+             placeholder="Food Description"
+             ng-model="AddFoodCtrl.newFoodItem.description"
+             required>
+      <input type="number"
+             placeholder="Calories"
+             ng-model="AddFoodCtrl.newFoodItem.calories"
+             required>
+      <input type="submit"
+             value="Add"
+             ng-disabled="addForm.$invalid">
+    </form>
+  </div>
+</div>
