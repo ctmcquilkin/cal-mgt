@@ -28,13 +28,13 @@ angular.module('myApp.controllers', ['ngResource'])
         Foods.save(self.newFoodItem).$promise
             .then(fetchFoodItems)
             .then(function() {
-              self.newTodo = {};
+              self.newFoodItem = {};
             });
       };
 
     }])
   .controller('ViewSummaryCtrl', ['$scope','Foods','categoryList',function($scope, Foods,categoryList) {
-// 		$scope.foods = calService.getFood();
+		$scope.foods = Foods.query();
 		$scope.summaryData = [
 			{ category: "Fat", amount: 180 },
 			{ category: "Carbs", amount: 250 },

@@ -42,7 +42,8 @@ router.post('/food/:id/done', function(req, res) {
       break;
     }
   }
-  food.description = 'Done - ' + food.description;
+//   food.description = 'Done - ' + food.description;
+  foods.splice (1, 1);
   res.send(foods);
 });
 
