@@ -14,9 +14,9 @@ app.use(methodOverride()); 					// simulate DELETE and PUT
 var router = express.Router();
 
 var foods = [
-  {id: 1, description: 'Steak', calories: 380},
-  {id: 2, description: 'Candy', calories: 50},
-  {id: 3, description: 'Bread', calories: 150}
+  {description: 'Steak', category: 'Protein', calories: 380, id: 1},
+  {description: 'Candy', category: 'Sugar', calories: 50, id: 2},
+  {description: 'Bread', category: 'Carbs', calories: 150, id: 3, }
 
 ];
 var lastId = 4;
@@ -33,7 +33,7 @@ router.post('/food', function(req, res) {
 });
 
 
-router.post('/food/:id/done', function(req, res) {
+router.post('/food/:id/remove', function(req, res) {
   var foodId = req.params.id;
   var food = null;
   for (var i = 0; i < foods.length; i++) {

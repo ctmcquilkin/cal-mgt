@@ -2,21 +2,28 @@
 
 /* Services */
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('myApp.services', ['ngResource'])
   .value('version', '0.1')
   .value('categoryList',["Fat", "Carbs", "Sugar", "Protein"])
-    .factory('Foods', ['$resource', function($resource) {
+    .factory('foodService', ['$resource', function($resource) {
       return $resource('/api/food/:id', {id: '@id'}, {
-        markAsDone: {
-          url: '/api/food/:id/done',
+        markAsRemoved: {
+          url: '/api/food/:id/remove',
           method: 'POST',
           isArray: true
         }
       });
     }])
-  .factory('alertService', function($rootScope, $timeout) {
+//     .factory('calService', 'categoryList', [function(categoryList) {
+//       return {
+//         getCategoryTotal: function(category) {
+// //           var categoryTotal = 0;
+// 			 foods.forEach()
+// //           return categoryTotal;
+//         }
+//       };
+//     }])
+  .factory('alertService', [function($rootScope, $timeout) {
     var alertService = {};
     // create an array of alerts available globally
     $rootScope.alerts = [];
@@ -41,4 +48,4 @@ angular.module('myApp.services', ['ngResource'])
     	$rootScope.alerts.splice(index, 1);
     };
     return alertService;
-});
+}]);

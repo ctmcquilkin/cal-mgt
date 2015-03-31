@@ -7,17 +7,9 @@
 <h2>Food Entries</h2>
 <div class="exp-details" ng-repeat="food in foods">
     <div class="col-sm-3">description: <span ng-bind="food.description"></span></div>
+    <div class="col-sm-3">category: <span ng-bind="food.category"></span></div>
     <div class="col-sm-2">calories: <span ng-bind="food.calories"></span></div>
 </div>
 
-<!-- 
-   <div ng-repeat="food in AddFoodCtrl.items"
-       class="exp-details">
-    <div class="col-sm-3">description: <span ng-bind="food.description"></span></div>
-    <div class="col-sm-2">calories: <span ng-bind="food.calories"></span></div>
-    <div class="col-sm-1"><button ng-click="AddFoodCtrl.done(food)">Remove</button></div>
-  </div>
- -->
- put a calendar here that updates the chart/links to edit page?
 </div>
 

@@ -5,28 +5,28 @@
  -->
 <div ng-controller="AddFoodCtrl as AddFoodCtrl">
   <h2>Add Food</h2>
-  <div ng-repeat="food in AddFoodCtrl.items"
+  <div ng-repeat="food in foodData"
        class="exp-details">
     <div class="col-sm-3">description: <span ng-bind="food.description"></span></div>
+    <div class="col-sm-2">category: <span ng-bind="food.category"></span></div>
     <div class="col-sm-2">calories: <span ng-bind="food.calories"></span></div>
-    <div class="col-sm-1"><button ng-click="AddFoodCtrl.done(food)">Remove</button></div>
+    <div class="col-sm-1"><button ng-click="remove(food)">Remove</button></div>
   </div>
   <br>
   <br>
-  <div>
     <form name="addForm"
-          ng-submit="AddFoodCtrl.add()">
+          ng-submit="add()">
       <input type="text"
              placeholder="Food Description"
-             ng-model="AddFoodCtrl.newFoodItem.description"
+             ng-model="newFoodItem.description"
              required>
+	  <select ng-model='newFoodItem.category' ng-options='category for category in categories' required>
       <input type="number"
              placeholder="Calories"
-             ng-model="AddFoodCtrl.newFoodItem.calories"
+             ng-model="newFoodItem.calories"
              required>
       <input type="submit"
              value="Add"
              ng-disabled="addForm.$invalid">
     </form>
-  </div>
 </div>

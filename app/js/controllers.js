@@ -2,72 +2,69 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', ['ngResource'])
+angular.module('myApp.controllers', ['ngResource', 'angularLocalStorage'])
     .controller('HomeCtrl', ['$scope',
-        function($scope) {
+        function($scope, storage) {
 
         }
     ])
-    .controller('AddFoodCtrl', ['Foods', function(Foods) {
-      var self = this;
-      self.items = [];
-      self.newFoodItem = {};
-      var fetchFoodItems = function() {
-        self.items = Foods.query();
-      };
+	.controller('AddFoodCtrl', ['$scope', 'storage', 'foodService', 'categoryList', function ($scope, storage, foodService, categoryList) {
+		storage.bind($scope, 'foodData', {
+		foods : [
+		  {description: 'Steak', category: 'Protein', calories: 380, id: 1},
+		  {description: 'Candy', category: 'Sugar', calories: 50, id: 2},
+		  {description: 'Bread', category: 'Carbs', calories: 150, id: 3, }
 
-      fetchFoodItems();
-
-      self.done = function(food) {
-        Foods.markAsDone(food, function(foods) {
-          self.items = foods;
-        });
-      };
-
-      self.add = function() {
-        Foods.save(self.newFoodItem).$promise
-            .then(fetchFoodItems)
-            .then(function() {
-              self.newFoodItem = {};
-            });
-      };
-
-    }])
-  .controller('ViewSummaryCtrl', ['$scope','Foods','categoryList',function($scope, Foods,categoryList) {
-		$scope.foods = Foods.query();
+		]});
+		$scope.categories = categoryList;
+		$scope.newFoodItem = {};
+		
+		var fetchFoodItems = function() {
+			$scope.foodData = foodService.query();
+		};
+		
+		fetchFoodItems();
+		
+		$scope.remove = function(food) {
+// 			console.log(food);
+// 			console.log(food.id);
+			foodService.markAsRemoved(food, function(foods) {
+			  $scope.foodData = foods;
+			});
+		};
+	
+		$scope.add = function() {
+			if($scope.foodData.indexOf($scope.newFoodItem) === -1) {
+				$scope.foodData.push($scope.newFoodItem);
+			}
+			foodService.save($scope.newFoodItem).$promise
+				.then(fetchFoodItems)
+				.then(function() {
+				  $scope.newFoodItem = {};
+				});
+		};
+    
+	}])
+  .controller('ViewSummaryCtrl', ['$scope','foodService','categoryList', function($scope, foodService, categoryList) {
+		$scope.foods = foodService.query();
+// 		$scope.summaryData = [];
 		$scope.summaryData = [
 			{ category: "Fat", amount: 180 },
 			{ category: "Carbs", amount: 250 },
 			{ category: "Sugar", amount: 80 },
 			{ category: "Protein", amount: 350 }
 		];
-		
-// 		categoryList.forEach(function(item) {
-// 				var catTotal = calService.getCategoryTotal(item);
-// 				$scope.summaryData.push({
-// 					category: item,
-// 					amount: catTotal
-// 				});
+				
+// 		categoryList.forEach(function(category, key) {
+// 			var catTotal = 0;
+// 			$scope.foods.forEach(function(amount, key) {
+// 					catTotal += parseFloat(key);
+// 			});
+// 			$scope.summaryData.push({
+// 				category: category,
+// 				amount: catTotal
+// 			});
 // 		});
-// 		function updateCatTotal( cat, value ) {
-// 		   for (var i in $scope.summaryData) {
-// // 		   	 console.log($scope.summaryData[i].category);
-// // 		   	 console.log($scope.summaryData[i].amount);
-// // 			 console.log(cat);
-// // 			 console.log(value);
-// 			 if ($scope.summaryData[i].category === cat) {
-// 				$scope.summaryData[i].amount -= value;
-// 				$scope.$digest();
-// 				break;
-// 			 }
-// 		   }
-// 		}
-// 		$scope.remove = function(food) {
-//         		var index = $scope.foods.indexOf(food);
-//     			$scope.foods.splice(index, 1);
-// 				calService.deleteFood(food.description);
-// 				updateCatTotal(food.category, food.amount);
-//         };
     } 
   ])
   .controller('NavigationCtrl',['$scope','$location',function($scope,$location){
