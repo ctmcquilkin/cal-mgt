@@ -21,6 +21,8 @@
              ng-model="newFoodItem.description"
              required>
 	  <select ng-model='newFoodItem.category' ng-options='category for category in categories' required>
+	  	<option value=''>Choose a Category:</option>
+	  </select>
       <input type="number"
              placeholder="Calories"
              ng-model="newFoodItem.calories"

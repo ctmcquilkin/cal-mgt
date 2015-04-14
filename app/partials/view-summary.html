@@ -5,11 +5,12 @@
 
 <div id="details">
 <h2>Food Entries</h2>
-<div class="exp-details" ng-repeat="food in foods">
+  <div ng-repeat="food in foodData" class="exp-details">
     <div class="col-sm-3">description: <span ng-bind="food.description"></span></div>
-    <div class="col-sm-3">category: <span ng-bind="food.category"></span></div>
+    <div class="col-sm-2">category: <span ng-bind="food.category"></span></div>
     <div class="col-sm-2">calories: <span ng-bind="food.calories"></span></div>
-</div>
+    <div class="col-sm-1"><button ng-click="remove(food)">Remove</button></div>
+  </div>
 
 </div>
 

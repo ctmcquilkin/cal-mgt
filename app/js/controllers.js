@@ -45,16 +45,32 @@ angular.module('myApp.controllers', ['ngResource', 'angularLocalStorage'])
 		};
     
 	}])
-  .controller('ViewSummaryCtrl', ['$scope','foodService','categoryList', function($scope, foodService, categoryList) {
-		$scope.foods = foodService.query();
-// 		$scope.summaryData = [];
-		$scope.summaryData = [
-			{ category: "Fat", amount: 180 },
-			{ category: "Carbs", amount: 250 },
-			{ category: "Sugar", amount: 80 },
-			{ category: "Protein", amount: 350 }
-		];
-				
+  .controller('ViewSummaryCtrl', ['$scope', 'storage', 'foodService', 'calService', 'categoryList', function($scope, storage, foodService, calService, categoryList) {
+		//console.log($scope.foodData);
+		$scope.summaryData = [];
+		$scope.foodData = [];
+// 		$scope.summaryData = [
+// 			{ category: "Fat", amount: 180 },
+// 			{ category: "Carbs", amount: 250 },
+// 			{ category: "Sugar", amount: 80 },
+// 			{ category: "Protein", amount: 350 }
+// 		];
+		
+		var fetchFoodItems = function() {
+          	$scope.foodData = foodService.query();
+		};
+		fetchFoodItems();
+		
+		categoryList.forEach(function(item) {
+				var catTotal = calService.getCategoryTotal(item);
+
+				$scope.summaryData.push({
+					category: item,
+					amount: catTotal
+				});
+			});
+		
+		
 // 		categoryList.forEach(function(category, key) {
 // 			var catTotal = 0;
 // 			$scope.foods.forEach(function(amount, key) {

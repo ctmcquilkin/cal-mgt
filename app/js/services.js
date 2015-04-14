@@ -14,15 +14,27 @@ angular.module('myApp.services', ['ngResource'])
         }
       });
     }])
-//     .factory('calService', 'categoryList', [function(categoryList) {
-//       return {
-//         getCategoryTotal: function(category) {
-// //           var categoryTotal = 0;
-// 			 foods.forEach()
-// //           return categoryTotal;
-//         }
-//       };
-//     }])
+    .factory('calService', [ function() {
+      return {
+			getCategoryTotal: function(category) {
+			var categoryTotal = 0;
+			Object.keys(localStorage)
+			  .forEach(function(key) {
+				if (key === 'foodData') {
+				  var foodArray = localStorage[key]
+				  foodArray = JSON.parse(foodArray)
+				  console.log(foodArray);
+				  foodArray.forEach(function(item) {
+				  	if (item.category == category) {
+				  		categoryTotal += parseFloat(item.calories);
+				  	}
+				  });
+				}
+			  });
+			return categoryTotal;
+		  }
+	   };
+    }])
   .factory('alertService', [function($rootScope, $timeout) {
     var alertService = {};
     // create an array of alerts available globally
