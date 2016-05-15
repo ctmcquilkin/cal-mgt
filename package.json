@@ -1,28 +1,15 @@
 {
-  "name": "angularjs-chapter6-server",
-  "description": "AngularJS test project",
-  "version": "0.0.0",
-  "main": "server.js",
-  "dependencies": {
-    "express": "~4.0.0",
-    "morgan": "~1.0.0",
-    "body-parser": "~1.0.0",
-    "method-override": "~1.0.0",
-    "gulp": "~3.6.1",
-    "gulp-minify-css": "~0.3.1",
-    "gulp-util": "~2.2.14",
-    "gulp-rename": "~1.2.0",
-    "gulp-sass": "~0.7.1",      
-    "gulp-autoprefixer": "0.0.7",
-    "karma": "~0.10",
-    "protractor": "~0.20.1",
-    "http-server": "^0.6.1",
-    "bower": "^1.3.1",
-    "shelljs": "^0.2.6",
-    "karma-junit-reporter": "^0.2.2",
-    "express": "~4.0.0",
-    "morgan": "~1.0.0",
-    "body-parser": "~1.0.0",
-    "method-override": "~1.0.0"
+  "name": "cal-mgt",
+  "version": "0.0.1",
+  "description": "Cal-mgt is a nutrition management app built as an Angular learning project by Chuck McQuilkin.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ctmcquilkin/cal-mgt"
+  },
+  "author": "Chuck McQuilkin",
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "gulp-util": "^2.2.20",
+    "gulp-webserver": "^0.8.1"
   }
 }
