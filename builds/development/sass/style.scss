@@ -8,6 +8,7 @@
 
 $purple: rgba(80,80,180,1);
 $green: #55bf52;
+$red: #ea5e4f;
 
 html, body { 
   padding: 1em; 
@@ -80,7 +81,7 @@ input[type="text"] {
   border-radius: 5px;
   outline: none;
   border: 1px solid #e4e4e4;
-  width: 80%;
+  width: 100%;
   margin-bottom: 1em;
   position: relative;
   z-index: 2;
