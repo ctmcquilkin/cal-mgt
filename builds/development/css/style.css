@@ -17,9 +17,14 @@
 
 html, body {
   padding: 1em;
-  background:#55bf52;
   font-family: Droid Serif, sans-serif;
   height: 100%;
+}
+.food {
+  background: #55bf52;
+}
+.activity {
+  background: #ea5e4f;
 }
 
 .container {
@@ -35,7 +40,6 @@ h1#headline {
   color: white;
   font-size: 2em;
   letter-spacing: 0.15em;
-  background:#55bf52;;
 }
 
 button {
@@ -51,8 +55,11 @@ button {
   display: inline-block;
 }
 
-button:hover {
-  background:#55bf52;
+.food button:hover {
+  background: rgba(#55bf52, 1);
+}
+.activity button:hover {
+  background: rgba(#ea5e4f, 1);
 }
 
 .block {
@@ -140,10 +147,12 @@ ul li {
 ul li span {
   float: right;
 }
-ul li:hover {
-  background:#55bf52;
-  color: white;
-}
+  .activity ul li:hover {
+    background: #ea5e4f;
+  }
+  .food ul li:hover {
+    background: #55bf52;
+  }
 
 .odd {
   background: #eaeaea;

@@ -12,9 +12,14 @@ $red: #ea5e4f;
 
 html, body { 
   padding: 1em; 
-  background: $green; 
   font-family: Droid Serif, sans-serif; 
   height: 100%;
+}
+.food {
+  background: $green;
+}
+.activity {
+  background: rgba($red, 1);
 }
 
 .container {
@@ -46,7 +51,10 @@ button {
   display: inline-block;
 }
 
-button:hover {
+.food button:hover {
+  background: rgba($green, 1);
+}
+.activity button:hover {
   background: rgba($green, 1);
 }
 
@@ -141,7 +149,11 @@ ul {
     }
   }
   
-  li:hover {
+  .activity li:hover {
+    background: $red;
+    color: white;
+  }
+  .food li:hover {
     background: $green;
     color: white;
   }

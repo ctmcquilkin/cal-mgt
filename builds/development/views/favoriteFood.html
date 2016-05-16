@@ -10,7 +10,7 @@
     
   </head>
 
-  <body>
+  <body class='food'>
 
     <html ng-app="root">
   <div class="container">
@@ -26,7 +26,7 @@
       <ul class="title">
         <li class="no-hover">Food Name<span>Calories</span></li>
       </ul>
-      <div id="friend-list" >
+      <div id="food-list" >
         <ul>
           <li ng-repeat="food in foods | filter: query | orderBy: orderList" ng-class="{odd: $odd, f: friend.gender == 'female', m: friend.gender == 'male'}"><img class="user-image" ng-src="{{food.image}}"/>{{food.name}}<span>{{food.calories}}</span></li>
         </ul>
