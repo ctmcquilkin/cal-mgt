@@ -13,6 +13,13 @@ h1.headline {
   letter-spacing: 0.15em;
 }
 
+.food {
+  background: #55bf52;
+}
+.activity {
+  background:  #ea5e4f; 
+}
+
 button {
   background:#999;
   color: white;
@@ -193,10 +200,11 @@ select {
 /* PAGES
 ============================================================================= */
 .page-home 		{ background:#00D0BC; color:#00907c; }
-.page-dashboard 		{ background:#ea5e4f; }
-.page-activity 	{ background:#E59400; color:#a55400; }
-.page-add-activity 	{ background:#fdc162; color:#a55400; }
-.page-food 	{ background:#7bb7fa; }
+.page-dashboard 		{ background:#E59400; color:#a55400; }
+.page-activity 	{ background:#ea5e4f;}
+.page-add-activity 	{ background:#7bb7fa; }
+.page-food 	{ background:#55bf52; }
+/*.page-food  { background:#7bb7fa; }*/
 .page-add-food 	{ background:#0ac2d2; }
 
 /* ANIMATIONS
