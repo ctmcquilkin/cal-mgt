@@ -1,4 +1,5 @@
-var animateApp = angular.module('animateApp', ['ngRoute', 'ngAnimate']);
+var animateApp = angular.module('animateApp', ['ngRoute', 'ngAnimate', 'firebase'])
+.constant('FIREBASE_URL', 'https://eat-right.firebaseio.com/');;
 
 animateApp.config(function($routeProvider) {
     $routeProvider
