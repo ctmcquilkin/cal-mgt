@@ -1,0 +1,28 @@
+  <div class="container" ng-controller="activityController">
+
+      <h1 class="headline" class='activity'>Activities</h1>
+      <div class="block">
+      <input type="text" ng-model="newName" class="third" placeholder="Name.." />
+      <select class="third" ng-model="newCategory" name="selectThis" id="selectThis">
+        <option value="">Category</option>
+        <option value="aerobic">Aerobic</option>
+        <option value="strength">Strength</option>
+      </select>
+      <input type="text" ng-model="newMinutes" class="third" placeholder="Minutes.." />
+      <button ng-click="addActivity()" class='activity'>Add a New Activity</button>
+      <input type="text" ng-model="query.name" class="search" placeholder="Search activities.." />
+      
+      <ul class="title">
+        <li class="no-hover">Activity<span>Calories burned</span></li>
+      </ul>
+      <div id="activity-list" >
+        <ul>
+          <li ng-repeat="activity in activities | filter: query | orderBy: orderList" ng-class="{odd: $odd, f: friend.gender == 'female', m: friend.gender == 'male'}"><img class="user-image" ng-src="{{food.image}}"/>{{activity.name}}<span>{{activity.calories}}</span></li>
+        </ul>
+      </div>
+      </div>
+      <a href="#" class="btn btn-primary btn-lg">Home</a>
+      <a href="#food" class="btn btn-danger btn-lg">Food</a>
+      <a href="#add-activity" class="btn btn-danger btn-lg">Add Activity</a>
+
+  </div>

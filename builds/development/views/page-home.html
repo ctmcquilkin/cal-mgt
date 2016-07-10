@@ -1,0 +1,22 @@
+  <div class="container" ng-controller="mainController">
+
+      <h1 class="headline" class='activity'>Welcome!</h1>
+      <h2>Enter your height, current weight and desired weight to get started</h2>
+      <div class="block">
+      <input type="text" ng-model="newMinutes" class="search" placeholder="Height" />
+      <input type="text" ng-model="newMinutes" class="search" placeholder="Weight" />
+      <input type="text" ng-model="newMinutes" class="search" placeholder="Age" />
+      <select class="third dropdown ddmenu" ng-model="newCategory" name="selectThis" id="selectThis">
+        <option value="">Gender</option>
+        <option value="protien">Protein</option>
+        <option value="fat">Fat</option>
+        <option value="carb">Carb</option>
+        <option value="sugar">Sugar</option>
+      </select>
+      <button ng-click="addActivity()" class='activity'>Go!</button>
+      </div>
+      <a href="#activity" class="btn btn-success btn-lg">Activity</a>
+      <a href="#food" class="btn btn-danger btn-lg">Food</a>
+      <a href="#dashboard" class="btn btn-danger btn-lg">Dashboard</a>
+
+  </div>

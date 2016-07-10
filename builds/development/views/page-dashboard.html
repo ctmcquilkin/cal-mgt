@@ -1,0 +1,18 @@
+  <div class="container" ng-controller="dashboardController">
+
+      <h1 class="headline" class='activity'>{{today | date:'shortDate'}}</h1>
+      <div class="block">
+      
+      <ul class="title">
+        <li class="no-hover">Goals (cal)<span>Remaining for Today</span></li>
+      </ul>
+      <div id="activity-list" >
+        <ul>
+          <li ng-repeat="activity in activities | filter: query | orderBy: orderList" ng-class="{odd: $odd, f: friend.gender == 'female', m: friend.gender == 'male'}"><img class="user-image" ng-src="{{food.image}}"/>{{activity.name}}<span>{{activity.calories}}</span></li>
+        </ul>
+      </div>
+      </div>
+      <a href="#" class="btn btn-primary btn-lg">Home</a>
+      <a href="#food" class="btn btn-danger btn-lg">Food</a>
+
+  </div>
