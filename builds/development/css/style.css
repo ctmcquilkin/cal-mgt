@@ -137,7 +137,9 @@ ul li span {
 /*	text-align:center;*/
 	top:0;  
 	left: 0;
-	width:100%; 
+	width:100%;
+  overflow: auto;
+  overflow-x:hidden;
 }
 
 /* Header Style */
