@@ -132,7 +132,7 @@ ul li span {
 
 .page        { 
 	bottom:0; 
-	padding-top:100px;
+	padding-top:60px;
 	position:absolute; 
 /*	text-align:center;*/
 	top:0;  
@@ -176,6 +176,15 @@ ul li span {
 }
 /*
 .page h1 	{ font-size:60px; }*/
+
+.remove {
+    position: relative;
+    top: -15px;
+    right: -14px;
+    width: 20em;
+    height: 1em;
+    background: url(../img/remove.svg) 96% / 5% no-repeat;
+}
 
 select {
     color: #777;

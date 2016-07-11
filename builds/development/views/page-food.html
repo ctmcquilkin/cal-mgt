@@ -1,12 +1,46 @@
-  <div class="container" ng-controller="favoriteFoodCtrl">
+  <div class="container" ng-controller="favoriteFoodCtrl as ctrl">
 
       <h1 class="headline">Fav Foods</h1>
       <div class="block">
-      <input type="text" ng-model="newName" class="third" placeholder="Name.." />
+
+  <!-- FORM-->
+  <form name="ctrl.foodForm"
+        novalidate>
+
+    <div>
+      <input type="text"
+             ng-model="ctrl.name"
+             required />
+    </div>
+
+    <!-- ADD button -->
+    <div>
+      <button ng-click="ctrl.addFood()"
+              ng-disabled="ctrl.foodForm.$invalid"
+              class="btn">Add a New Food</button>
+    </div>
+  </form>
+
+  <!-- FOOD LIST -->
+  <ul class="list-group">
+
+    <li ng-repeat="t in ctrl.foodList"
+        class="list-group-item">
+
+      <!-- food info -->
+      <h3>{{t.name}}</h3>
+<!--       <em>({{t.date | date:'longDate'}})</em> -->
+
+      <!-- remove button -->
+      <span class="remove"
+            ng-click="ctrl.removeItem(t)"
+            style="cursor:pointer"></span>
+    </li>
+  </ul>
+
+
+<!--       <input type="text" ng-model="newName" class="third" placeholder="Name.." />
       <input type="text" ng-model="newCalories" class="third" placeholder="Calories.." />
-<!--       <input type="select" ng-model="newGender" class="third" placeholder="Category..">
-        <option value="carb">Carb</option>
-      </select> -->
       <select class="third dropdown ddmenu" ng-model="newCategory" name="selectThis" id="selectThis">
         <option value="">Category</option>
         <option value="protien">Protein</option>
@@ -24,7 +58,7 @@
         <ul>
           <li ng-repeat="food in foods | filter: query | orderBy: orderList" ng-class="{odd: $odd, f: friend.gender == 'female', m: friend.gender == 'male'}"><img class="user-image" ng-src="{{food.image}}"/>{{food.name}}<span>{{food.calories}}</span></li>
         </ul>
-      </div>
+      </div> -->
       </div>
       <a href="#" class="btn btn-primary btn-lg">Home</a>
       <a href="#add-food" class="btn btn-success btn-lg">Add Food</a>

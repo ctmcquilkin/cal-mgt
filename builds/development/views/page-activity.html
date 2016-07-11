@@ -1,8 +1,44 @@
-  <div class="container" ng-controller="activityController">
+  <div class="container" ng-controller="activityController as ctrl">
 
       <h1 class="headline activity">Fav Activities</h1>
       <div class="block">
-      <input type="text" ng-model="newName" class="third" placeholder="Name.." />
+
+  <!-- FORM-->
+  <form name="ctrl.activityForm"
+        novalidate>
+
+    <div>
+      <input type="text"
+             ng-model="ctrl.name"
+             required />
+    </div>
+
+    <!-- ADD button -->
+    <div>
+      <button ng-click="ctrl.addActivity()"
+              ng-disabled="ctrl.activityForm.$invalid"
+              class="btn">Add a New Activity</button>
+    </div>
+  </form>
+
+  <!-- ACTIVITY LIST -->
+  <ul class="list-group">
+
+    <li ng-repeat="t in ctrl.activityList"
+        class="list-group-item">
+
+      <!-- activity info -->
+      <h3>{{t.name}}</h3>
+<!--       <em>({{t.date | date:'longDate'}})</em> -->
+
+      <!-- remove button -->
+      <span class="remove"
+            ng-click="ctrl.removeItem(t)"
+            style="cursor:pointer"></span>
+    </li>
+  </ul>
+
+<!--       <input type="text" ng-model="newName" class="third" placeholder="Name.." />
       <input type="text" ng-model="newMinutes" class="third" placeholder="Minutes.." />
       <select class="third" ng-model="newCategory" name="selectThis" id="selectThis">
         <option value="">Category</option>
@@ -19,7 +55,7 @@
         <ul>
           <li ng-repeat="activity in activities | filter: query | orderBy: orderList" ng-class="{odd: $odd, f: friend.gender == 'female', m: friend.gender == 'male'}"><img class="user-image" ng-src="{{food.image}}"/>{{activity.name}}<span>{{activity.calories}}</span></li>
         </ul>
-      </div>
+      </div> -->
       </div>
       <a href="#" class="btn btn-primary btn-lg">Home</a>
       <a href="#food" class="btn btn-danger btn-lg">Food</a>

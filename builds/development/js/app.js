@@ -1,5 +1,33 @@
 var animateApp = angular.module('animateApp', ['ngRoute', 'ngAnimate', 'firebase'])
-.constant('FIREBASE_URL', 'https://eat-right.firebaseio.com/');;
+.constant('FIREBASE_ROOT_URL', 'https://eat-right.firebaseio.com/favoritelist/');
+
+/*
+URL Scheme will be three lists, on for activities, 
+one for food and one for totals in the followin format:
+
+// https://eat-right.firebaseio.com/favoritelist/
+{
+  // https://eat-right.firebaseio.com/favoritelist/food-items
+  "food-items": {
+ 
+    // https://eat-right.firebaseio.com/favoritelist/food-items/milk
+    "milk": {
+ 
+      // https://eat-right.firebaseio.com/favoritelist/food-items/milk/name
+      "name": "Milk",
+ 
+      // https://eat-right.firebaseio.com/favoritelist/food-items/milk/addedByUser
+      "addedByUser": "David"
+    },
+ 
+    "pizza": {
+      "name": "Pizza",
+      "addedByUser": "Alice"
+    },
+  }
+}
+
+*/
 
 animateApp.config(function($routeProvider) {
     $routeProvider
@@ -34,7 +62,7 @@ animateApp.controller('mainController', function($scope) {
     $scope.pageClass = 'page-home';
 });
 
-animateApp.controller('activityController', function($scope) {
+animateApp.controller('activityController', function($scope, $firebaseArray, FIREBASE_ROOT_URL) {
     $scope.pageClass = 'page-activity';
      $scope.orderList = "name";
      $scope.query;
@@ -46,7 +74,26 @@ animateApp.controller('activityController', function($scope) {
     ];
       var list = $scope.activities;    
       var arrayLength = list.length;
-      
+
+      // Sync to Firebase as Array
+      this.activityList = $firebaseArray(new Firebase(FIREBASE_ROOT_URL + 'activity-items'));
+
+      // Add Activity
+      this.addActivity = function () {
+
+        this.activityList.$add({
+          name: this.name,
+          date: new Date().valueOf()
+        });
+
+        this.name = null;
+      }.bind(this);
+
+      // Remove Activity
+      this.removeItem = function (item) {
+        this.activityList.$remove(item);
+      };
+
      // Add New Activity Button
       $scope.addActivity = function() {
         if($scope.query !== ''){
@@ -67,7 +114,7 @@ animateApp.controller('addActivityController', function($scope) {
     $scope.pageClass = 'page-add-activity';
 });
 
-animateApp.controller('favoriteFoodCtrl', function($scope) {
+animateApp.controller('favoriteFoodCtrl', function($scope, $firebaseArray, FIREBASE_ROOT_URL) {
     $scope.pageClass = 'page-food';
      $scope.orderList = "name";
      $scope.query;
@@ -79,8 +126,28 @@ animateApp.controller('favoriteFoodCtrl', function($scope) {
       {name: "Salad (endless summer)", category: "vegetable", calories: 150},
       {name: "Salad (spinach)", category: "vegetable", calories: 140},
      ];
-      var list = $scope.foods;      
+      var list = $scope.foods;
       var arrayLength = list.length;
+
+      // Sync to Firebase as Array
+      this.foodList = $firebaseArray(new Firebase(FIREBASE_ROOT_URL + 'food-items'));
+
+      // Add Food
+      this.addFood = function () {
+
+        this.foodList.$add({
+          name: this.name,
+          date: new Date().valueOf()
+        });
+
+        this.name = null;
+      }.bind(this);
+
+      // Remove Food
+      this.removeItem = function (item) {
+        this.foodList.$remove(item);
+      };
+
       
          // Add New Food Button
       $scope.addFavoriteFood = function() {
