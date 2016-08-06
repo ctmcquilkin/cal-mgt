@@ -29,6 +29,20 @@ one for food and one for totals in the followin format:
 
 */
 
+/*
+
+To convert minutes to calories:
+
+Men:
+
+Calories Burned = [(Age x 0.2017) — (Weight x 0.09036) + (Heart Rate x 0.6309) — 55.0969] x Time / 4.184.
+
+Women:
+
+Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) — 20.4022] x Time / 4.184.
+
+*/
+
 animateApp.config(function($routeProvider) {
     $routeProvider
     	.when('/', {
