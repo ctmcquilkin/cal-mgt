@@ -63,7 +63,17 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
 
 .controller('ListCtrl', function($scope, Foods) {
   $scope.pageClass = 'page-food';
+  $scope.orderList = "name";
   $scope.foods = Foods;
+
+  // Reverse Order Button
+  $scope.reverse = function(){
+    if($scope.orderList == "name"){
+      $scope.orderList = "-name";
+    } else {
+      $scope.orderList = "name";
+    }
+  };
 })
 
 .controller('CreateCtrl', function($scope, $location, $timeout, Foods) {
