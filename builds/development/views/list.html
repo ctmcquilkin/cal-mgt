@@ -1,0 +1,12 @@
+  <div class="container">
+      <h1 class="headline">Fav Foods</h1>
+      <div class="block">
+    <input type="text" ng-model="search" class="search-query" placeholder="Search">
+    <ul class="title">
+        <li class="no-hover">Food Name<span></span><span><a href="#/new"><i class="fa fa-plus-circle"></i></a></span></li>
+      </ul>
+      <div id="food-list" >
+        <ul>
+          <li ng-repeat="food in foods | orderByPriority | filter:search | orderBy:'name'" ng-class="{odd: $odd}"><img class="user-image" ng-src="{{food.image}}"/>{{food.name}}<span><a href="#/edit/{{food.$id}}"><i class="fa fa-edit"></i></a></span></li>
+        </ul>
+      </div>
