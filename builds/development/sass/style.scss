@@ -1,0 +1,258 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif|Oregano);
+
+// *, *:before, *:after { @include box-sizing(border-box) }
+
+.bold { font-weight: bold }
+.italic { font-style: italic }
+.underline { text-decoration: underline }
+
+$purple: rgba(80,80,180,1);
+$green: #55bf52;
+$blue: #2B69B7;
+$red: #ea5e4f;
+$grey: #999;
+$dark-grey: #666;
+
+html, body { 
+  padding: 1em; 
+  font-family: Droid Serif, sans-serif; 
+  height: 100%;
+}
+.food {
+  background: $green;
+}
+.activity {
+  background: rgba($red, 1);
+}
+.secondary {
+  background: rgba($grey, 1);
+}
+
+.container {
+  max-width: 300px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+h1.headline {
+  font-family: Oregano, cursive;
+  text-align: center;
+  margin-bottom: 0.5em;
+  color: white;
+  font-size: 2em;
+  letter-spacing: 0.15em;
+  background: $green;
+}
+
+button {
+  background: rgba($grey, 0.9);
+  color: white;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.food button:hover {
+  background: rgba($green, 1);
+}
+.activity button:hover {
+  background: rgba($green, 1);
+}
+.secondary button:hover {
+  background: rgba($dark-grey, 1);
+}
+
+.link-btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 1.2em 1.4em;
+  margin-bottom: 2em;
+  border-radius: 50em;
+  background-color: rgb(7, 213, 229);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: .8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+.link-btn:hover {
+  background-color: rgb(9, 171, 197);
+}
+
+.dropdown { 
+  display: block;
+  padding: 13px 16px;
+  width: 266px;
+  margin: 0 auto;
+  position: relative;
+  cursor: pointer;
+  border-left: 4px solid #739cda;
+  background: #fff;
+  font-size: 1.55em;
+  color: #656565;
+  font-weight: normal;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  -webkit-transition: all 0.15s linear;
+  -moz-transition: all 0.15s linear;
+  -ms-transition: all 0.15s linear;
+  -o-transition: all 0.15s linear;
+  transition: all 0.15s linear;
+}
+.dropdown:hover { color: #898989; }
+
+.dropdown.open {
+  background: #5a90e0;
+  color: #fff;
+  border-left-color: #6c6d70;
+}
+
+.dropdown ul { 
+  position: absolute;
+  top: 100%;
+  left: -4px; /* move content -4px because of container left border */
+  width: 266px;
+  padding: 5px 0px;
+  display: none;
+  border-left: 4px solid #8e9196;
+  background: #fff;
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+.dropdown ul li { font-size: 0.9em; }
+
+.dropdown ul li a { 
+  text-decoration: none;
+  display: block;
+  color: #447dd3;
+  padding: 7px 15px;
+}
+.dropdown ul li a:hover {
+  color: #6fa0e9;
+  background: #e7f0f7;
+}
+
+.block {
+  background: white;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0 0 1px 2px rgba(0,0,0,0.2);
+  margin: 0 auto;
+  overflow: scroll;
+}
+
+.m {
+  color: #2980b9;
+}
+
+.f {
+  color: hotpink;
+}
+
+.disabled {
+  background: #eee;
+  cursor: auto;
+}
+
+input {
+  font-family: Droid Serif, sans-serif;
+}
+
+input[type="text"] { 
+  padding: 1em; 
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #e4e4e4;
+  width: 100%;
+  margin-bottom: 1em;
+  position: relative;
+  z-index: 2;
+  
+  &:after {
+    position: absolute;
+    display: block;
+    top: 5px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    background: url('http://cdn.sstatic.net/stackoverflow/img/sprites.png?v=4') 0 -690px;
+    cursor: pointer;
+    z-index: 3;
+  }
+}
+
+input.third {
+  width: calc(100% / 3 - 0.75em);
+  display: inline-block;
+  margin-right: 0.25em;
+  
+  &:last-child {
+    margin-right: none!important;
+  }
+}
+
+input[type="checkbox"]{
+  margin: 1em 0.5em;
+}
+
+ul.title {
+  border-bottom: 1px dotted #afafaf;
+  
+  li.no-hover {
+	  font-size: 0.9em;
+     color: #afafaf;
+     padding: 0.5em 1em 0.5em 1em;
+     background: transparent;
+    
+    &:hover {
+      background: transparent;
+      cursor: auto;
+    }
+  }
+}
+
+ul {
+  font-size: 0.8em;
+  
+  li {
+    padding: 1em;
+    cursor: pointer;
+    
+    span {
+      float: right;
+    }
+  }
+  
+  .activity li:hover {
+    background: $red;
+    color: white;
+  }
+  .food li:hover {
+    background: $green;
+    color: white;
+  }
+}
+
+.odd { background: #eaeaea; }
+img {
+  wight: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+img.user-image {
+  width: 20px;
+  float: left;
+  vertical-align: sup;
+  margin-right: 1em;
+}
+
+////////////////////////
