@@ -33,7 +33,11 @@ button {
   display: inline-block;
 }
 
-.food button:hover {
+button:hover {
+  background: rgba(#55bf52, 1);
+}
+
+button:hover {
   background: rgba(#55bf52, 1);
 }
 .activity button:hover {
@@ -107,6 +111,11 @@ ul.title li.no-hover {
 ul.title li.no-hover:hover {
   background: transparent;
   cursor: auto;
+}
+
+ul li:hover {
+  background: #55bf52;
+  color: white;
 }
 
 ul {
