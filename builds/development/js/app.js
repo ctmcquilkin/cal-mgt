@@ -65,6 +65,42 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
   $scope.pageClass = 'page-food';
   $scope.orderList = "name";
   $scope.foods = Foods;
+  var list = $scope.foods;
+  var arrayLength = list.length;
+  imageArray = [];
+
+ //  var list = $scope.foods    
+ //  var arrayLength = list.length;
+
+ //  function getImage($scope,index){
+ //      $scope.foods[index].image = 'img/png/food-'+index+'.png';
+ //  }; 
+   
+ //  // Get a new image for each friend in the array
+ // for(var i=0;i<arrayLength;i++){                      
+ //    getImage($scope, i);
+ //  }
+  // for (var i=0; i < arrayLength; i++) {
+  //   $scope.foods[index].image = 'img/png/food-'+i+'.png';
+  // }
+    // Load the array of images
+    // var img = imageArray.push('i');
+    // Foods.imageURL = "img/png/food-"+i+".png";
+    // console.log(Foods.length);
+    // for (i=0; i<arrayLength; i++) {
+    //   imageArray.push(i);
+    // }
+    // getImage = function() {
+    //   for (i=0; i<arrayLength; i++) {
+    //     imageArray.push(i);
+    //       // imageArray.push[i] = "img/png/food-"+i+".png";
+    //   }
+    // };
+    // getImage();
+
+    // console.log(imageArray);
+
+    // picture.setIcon(imageArray[]);
 
   // Reverse Order Button
   $scope.reverse = function(){

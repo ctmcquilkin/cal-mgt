@@ -1,30 +1,24 @@
-    <div class="container">
-      <h1 class="headline">Add Food 6/4/16</h1>
-      <div class="block">
-      <form name="myForm">
-        <div class="control-group" ng-class="{error: myForm.name.$invalid && !myForm.name.$pristine}">
-          <!--<label>Name</label>-->
-          <input type="text" ng-model="food.name" placeholder="Name..">
-          <span ng-show="myForm.name.$error.required && !myForm.name.$pristine" class="help-inline">Required {{myForm.name.$pristine}}</span>
-        </div>
-        
-        <div class="control-group" ng-class="{error: myForm.site.$invalid && !myForm.site.$pristine}">
-          <select class="third dropdown ddmenu" ng-model="food.category" name="cat" id="selectThis">
-            <option value="">Category</option>
-            <option value="protien">Protein</option>
-            <option value="fat">Fat</option>
-            <option value="carb">Carb</option>
-            <option value="sugar">Sugar</option>
-          </select>
-        </div>
-
-        <!--<label>Calories</label>-->
-        <input type="text" ng-model="food.calories" placeholder="Calories..">
-        <br>
-        
-        <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-primary">Save</button>
-        <button ng-click="destroy()" ng-show="food.$remove" class="btn btn-danger">Delete</button>
-        <a href="#/" class="btn">Cancel</a>
-      </form>
+<div class="container">
+    <h1 class="headline">Add<span ng-show="food.$remove">/Edit</span> food</h1>
+    <div class="block">
+    <form name="myForm">
+      <div class="control-group">
+        <!--<label>Name</label>-->
+        <input type="text" ng-model="food.name" placeholder="Name.."/>
       </div>
-    </div>
+
+      <!--<label>Calories</label>-->
+      <input type="text" ng-model="food.calories" placeholder="Calories.."/>
+      <input type="text" ng-model="food.servingSize" placeholder="Serving Size.."/>
+      <input type="text" ng-model="food.fat" placeholder="Fat.."/>
+      <input type="text" ng-model="food.cholesterol" placeholder="Cholesterol.."/>
+      <input type="text" ng-model="food.carbohydrates" placeholder="Carbs.."/>
+      <input type="text" ng-model="food.protein" placeholder="Protein.."/>
+      <input type="text" ng-model="food.sodium" placeholder="Sodium.."/>
+      
+      <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-primary">Save</button>
+      <button ng-click="destroy()" ng-show="food.$remove" class="btn btn-danger">Delete</button>
+      <a href="#/" class="btn">Cancel</a>
+    </form>
+  </div>
+</div>
