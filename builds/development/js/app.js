@@ -61,56 +61,52 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
     });
 })
 
-.controller('ListCtrl', function($scope, Foods) {
+.controller('ListCtrl', function($scope, $rootScope, Foods) {
   $scope.pageClass = 'page-food';
-  $scope.orderList = "name";
   $scope.foods = Foods;
-  var list = $scope.foods;
-  var arrayLength = list.length;
-  imageArray = [];
-
- //  var list = $scope.foods    
- //  var arrayLength = list.length;
-
- //  function getImage($scope,index){
- //      $scope.foods[index].image = 'img/png/food-'+index+'.png';
- //  }; 
-   
- //  // Get a new image for each friend in the array
- // for(var i=0;i<arrayLength;i++){                      
- //    getImage($scope, i);
- //  }
-  // for (var i=0; i < arrayLength; i++) {
-  //   $scope.foods[index].image = 'img/png/food-'+i+'.png';
-  // }
-    // Load the array of images
-    // var img = imageArray.push('i');
-    // Foods.imageURL = "img/png/food-"+i+".png";
-    // console.log(Foods.length);
-    // for (i=0; i<arrayLength; i++) {
-    //   imageArray.push(i);
-    // }
-    // getImage = function() {
-    //   for (i=0; i<arrayLength; i++) {
-    //     imageArray.push(i);
-    //       // imageArray.push[i] = "img/png/food-"+i+".png";
-    //   }
-    // };
-    // getImage();
-
-    // console.log(imageArray);
-
-    // picture.setIcon(imageArray[]);
-
-  // Reverse Order Button
-  $scope.reverse = function(){
-    if($scope.orderList == "name"){
-      $scope.orderList = "-name";
-    } else {
-      $scope.orderList = "name";
-    }
-  };
 })
+
+.controller('AuthCtrl', [
+  '$scope', '$rootScope', '$firebaseAuth', function($scope, $rootScope, $firebaseAuth) {
+    var ref = new Firebase('https://eat-right.firebaseio.com/favoritelist/');
+    $rootScope.auth = $firebaseAuth(ref);
+    
+    $scope.signIn = function () {
+      $rootScope.auth.$login('password', {
+        email: $scope.email,
+        password: $scope.password
+      }).then(function(user) {
+        $rootScope.alert.message = '';
+      }, function(error) {
+        if (error = 'INVALID_EMAIL') {
+          console.log('email invalid or not signed up — trying to sign you up!');
+          $scope.signUp();
+        } else if (error = 'INVALID_PASSWORD') {
+          console.log('wrong password!');
+        } else {
+          console.log(error);
+        }
+      });
+    }
+
+    $scope.signUp = function() {
+      $rootScope.auth.$createUser($scope.email, $scope.password, function(error, user) {
+        if (!error) {
+          $rootScope.alert.message = '';
+        } else {
+          $rootScope.alert.class = 'danger';
+          $rootScope.alert.message = 'The username and password combination you entered is invalid.';
+        }
+      });
+    }
+  }
+])
+
+.controller('AlertCtrl', [
+  '$scope', '$rootScope', function($scope, $rootScope) {
+    $rootScope.alert = {};
+  }
+])
 
 .controller('CreateCtrl', function($scope, $location, $timeout, Foods) {
   $scope.pageClass = 'page-add-food';
