@@ -77,6 +77,7 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
         password: $scope.password
       }).then(function(user) {
         $rootScope.alert.message = '';
+        $rootScope.auth.user = $scope.auth.user;
       }, function(error) {
         if (error = 'INVALID_EMAIL') {
           console.log('email invalid or not signed up — trying to sign you up!');

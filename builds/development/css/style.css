@@ -20,7 +20,110 @@ h1.headline {
   background:  #ea5e4f; 
 }
 
-button {
+/* -------------------------------- 
+
+Main components 
+
+-------------------------------- */
+.ca-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.2);
+  /*   z-index: index($main-elements, navigation); // see partials > _variables.scss */
+  z-index: 3; }
+  .ca-header::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .ca-header #ca-logo {
+    float: left;
+    margin: 13px 0 0 5%; }
+    .ca-header #ca-logo img {
+      display: block; }
+  @media only screen and (min-width: 600px) {
+    .ca-header {
+      height: 70px; }
+      .ca-header #ca-logo {
+        margin: 23px 0 0 5%; } }
+
+.ca-main-nav {
+  float: right;
+  margin-right: 5%;
+  width: 44px;
+  height: 100%;
+  background: url("../img/ca-icon-menu.svg") no-repeat center center;
+  background-size: 44px 44px;
+  cursor: pointer; }
+  .ca-main-nav ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%); }
+    .ca-main-nav ul.is-visible {
+      -webkit-transform: translateY(50px);
+      -moz-transform: translateY(50px);
+      -ms-transform: translateY(50px);
+      -o-transform: translateY(50px);
+      transform: translateY(50px); }
+  .ca-main-nav a {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 5%;
+    background: #2f292a;
+    border-top: 1px solid #453c3d;
+    color: #8e7d7f; }
+  @media only screen and (min-width: 600px) {
+    .ca-main-nav {
+      width: auto;
+      height: auto;
+      background: none;
+      margin-top: 10px;
+      cursor: auto; }
+      .ca-main-nav ul {
+        position: static;
+        width: auto;
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0);
+        line-height: 70px; }
+        .ca-main-nav ul.is-visible {
+          -webkit-transform: translateY(0);
+          -moz-transform: translateY(0);
+          -ms-transform: translateY(0);
+          -o-transform: translateY(0);
+          transform: translateY(0); }
+      .ca-main-nav li {
+        display: inline-block;
+        margin-left: 1em; }
+      .ca-main-nav a {
+        display: inline-block;
+        height: auto;
+        line-height: normal;
+        background: transparent;
+        padding: 0.6em 1em;
+        border-top: none;
+        color: #3d3536;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 20px;
+        font-size: 1.25rem; }
+        .no-touch .ca-main-nav a:hover {
+          color: #2C97DE; } }
+
+
+button[type="submit"] {
   background:#999;
   color: white;
   padding: 1em;
@@ -64,22 +167,62 @@ input[type="text"] {
   border-radius: 5px;
   outline: none;
   border: 1px solid #e4e4e4;
+  max-width: 245px;
+  margin-bottom: 1em;
+  position: relative;
+  z-index: 2;
+}
+input[type="password"] {
+  padding: 1em;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #e4e4e4;
+  max-width: 245px;
+  margin-bottom: 1em;
+  position: relative;
+  z-index: 2;
+}
+
+#auth, #signedIn {
+  font-size: 0.9em;
+  color: #afafaf;
+  padding: 0.5em 1em 0.5em 1em;
+}
+
+#auth button, #signedIn button {
+  background:#999;
+  color: white;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+  min-width: 80px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.page input[type="text"] {
+  padding: 1em;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #e4e4e4;
   width: 100%;
   max-width: 245px;
   margin-bottom: 1em;
   position: relative;
   z-index: 2;
 }
-input[type="text"]:after {
-  position: absolute;
-  display: block;
-  top: 5px;
-  right: 5px;
-  width: 16px;
-  height: 16px;
-  background: url("http://cdn.sstatic.net/stackoverflow/img/sprites.png?v=4") 0 -690px;
-  cursor: pointer;
-  z-index: 3;
+.page input[type="password"] {
+  padding: 1em;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #e4e4e4;
+  width: 100%;
+  max-width: 245px;
+  margin-bottom: 1em;
+  position: relative;
+  z-index: 2;
 }
 
 input.third {
@@ -132,7 +275,7 @@ ul li span {
 
 .page        { 
 	bottom:0; 
-	padding-top:60px;
+	padding-top:100px;
 	position:absolute; 
 /*	text-align:center;*/
 	top:0;  
@@ -205,7 +348,8 @@ select {
     background: url(../img/arrow.svg) 96% / 3% no-repeat;
 }
 
-.page a     { margin-top:50px; }
+.page a     { margin-top:50px; color: #333 }
+.page a:visited { color: #333; }
 #loading      { color:#333; position:absolute; text-align:center; top:50px; width:100%; z-index: 0; }
 
 /* PAGES
