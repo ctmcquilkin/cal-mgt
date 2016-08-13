@@ -1,7 +1,35 @@
-  <div class="container" ng-controller="favoriteFoodCtrl as ctrl">
+  <div class="container" ng-controller="favoriteFoodCtrl">
 
-      <h1 class="headline">Fav Foods</h1>
+  <div layout="row" flex>
+    <div layout="column" flex id="content">
+      <md-content layout="column" flex class="md-padding">
+        <div ng-controller="SampleCtrl" layout="column" ng-cloak class="sm-inline-form"> 
+          <md-content layout-padding layout="row" layout-sm="column">
+            <md-input-container>
+              <label>Email</label>
+              <input ng-model="user.email" type="email">
+            </md-input-container>
+            <md-input-container>
+              <label>Password</label>
+              <input ng-model="user.password" type="password">
+            </md-input-container>
+            <md-button ng-show="!isLoggedIn" class="md-raised md-primary md-ink-ripple" ng-click="login()">Log in</md-button>
+            <md-button ng-show="!isLoggedIn" class="md-raised md-ink-ripple" ng-click="createUser()">Create User</md-button>
+            <md-button ng-show="isLoggedIn" class="md-raised md-primary md-ink-ripple" ng-click="logout()">Log out</md-button>
+            <md-button ng-show="isLoggedIn" class="md-raised md-warn md-ink-ripple" ng-click="removeUser()">Remove User</md-button>
+          </md-content>
+
+          <p ng-if="message">Message: <strong>{{ message }}</strong></p>
+          <p ng-if="error">Error: <strong>{{ error }}</strong></p>
+
+        </div>
+      </md-content>
+    </div>
+  </div>
+
+      <h1 class="headline">Fav Foods Hi</h1>
       <div class="block">
+
 
   <!-- FORM-->
   <form name="ctrl.foodForm"

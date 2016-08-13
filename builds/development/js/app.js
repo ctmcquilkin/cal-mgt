@@ -61,13 +61,59 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
     });
 })
 
-.controller('ListCtrl', function($scope, Foods) {
+.controller('ListCtrl', function($scope, $rootScope, Foods) {
   $scope.pageClass = 'page-food';
   $scope.foods = Foods;
 })
 
+.controller('AuthCtrl', [
+  '$scope', '$rootScope', '$firebaseAuth', function($scope, $rootScope, $firebaseAuth) {
+    var ref = new Firebase('https://eat-right.firebaseio.com/favoritelist/');
+    $rootScope.auth = $firebaseAuth(ref);
+    $scope.signInVisible = false;
+    
+    $scope.signIn = function () {
+      $rootScope.auth.$login('password', {
+        email: $scope.email,
+        password: $scope.password
+      }).then(function(user) {
+        $rootScope.alert.message = '';
+        $rootScope.auth.user = $scope.auth.user;
+      }, function(error) {
+        if (error = 'INVALID_EMAIL') {
+          console.log('email invalid or not signed up — trying to sign you up!');
+          $scope.signUp();
+        } else if (error = 'INVALID_PASSWORD') {
+          console.log('wrong password!');
+        } else {
+          console.log(error);
+        }
+      });
+    }
+
+    $scope.signUp = function() {
+      $rootScope.auth.$createUser($scope.email, $scope.password, function(error, user) {
+        if (!error) {
+          $rootScope.alert.message = '';
+        } else {
+          $rootScope.alert.class = 'danger';
+          console.log(error);
+          $rootScope.alert.message = 'The username and password combination you entered is invalid.';
+        }
+      });
+    }
+  }
+])
+
+.controller('AlertCtrl', [
+  '$scope', '$rootScope', function($scope, $rootScope) {
+    $rootScope.alert = {};
+  }
+])
+
 .controller('CreateCtrl', function($scope, $location, $timeout, Foods) {
   $scope.pageClass = 'page-add-food';
+  $scope.newFood = $location.path() === '/new';
   $scope.save = function() {
     Foods.$add($scope.food, function() {
       $timeout(function() { $location.path('/'); });
@@ -77,7 +123,7 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
 
 .controller('EditCtrl',
   function($scope, $location, $routeParams, $firebase, fbURL) {
-    $scope.pageClass = 'page-activity';
+    $scope.pageClass = 'page-edit';
     var foodUrl = fbURL + $routeParams.foodId;
     $scope.food = $firebase(new Firebase(foodUrl));
 

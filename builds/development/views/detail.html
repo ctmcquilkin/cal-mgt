@@ -1,5 +1,5 @@
     <div class="container">
-      <h1 class="headline">Add Food 6/4/16</h1>
+      <h1 class="headline"><span ng-hide="newFood">Editing</span> {{food.name}}</h1>
       <div class="block">
       <form name="myForm">
         <div class="control-group" ng-class="{error: myForm.name.$invalid && !myForm.name.$pristine}">

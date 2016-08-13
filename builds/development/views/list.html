@@ -1,12 +1,42 @@
-  <div class="container">
+  <div ng-controller="AlertCtrl">
+    <div class="alert alert-{{alert.class}}" ng-model="alert.message" ng-show="alert.message">
+      {{alert.message}}
+    </div>
+  </div>
+<div ng-controller="AuthCtrl">
+    <div class="user" ng-hide="auth.user">
+      <header class="user__header">
+          <img src="img/logo.svg" alt="" />
+          <h1 class="user__title">Welcome to Eat Right! Please sign in.</h1>
+      </header>
+      
+      <form class="form">
+          
+          <div class="form__group">
+              <input type="email" placeholder="Email" ng-model="email" class="form__input" />
+          </div>
+          
+          <div class="form__group">
+              <input type="password" placeholder="Password" ng-model="password" class="form__input" />
+          </div>
+          
+          <button class="btn" type="submit" ng-click="signIn()">Sign in</button>
+      </form>
+    </div>
+
+    <div class="container" ng-if="auth.user">
+
       <h1 class="headline">Fav Foods</h1>
       <div class="block">
-    <input type="text" ng-model="search" class="search-query" placeholder="Search">
-    <ul class="title">
-        <li class="no-hover">Food Name<span></span><span><a href="#/new"><i class="fa fa-plus-circle"></i></a></span></li>
-      </ul>
-      <div id="food-list" >
-        <ul>
-          <li ng-repeat="food in foods | orderByPriority | filter:search | orderBy:'name'" ng-class="{odd: $odd}"><img class="user-image" ng-src="{{food.image}}"/>{{food.name}}<span><a href="#/edit/{{food.$id}}"><i class="fa fa-edit"></i></a></span></li>
-        </ul>
-      </div>
+        <input type="text" ng-model="search" class="search-query" placeholder="Search">
+          <ul class="title">
+            <li class="no-hover">Food Name<span></span><span><a href="#/new"><i class="fa fa-plus-circle"></i></a></span></li>
+          </ul>
+        <div id="food-list" >
+          <ul>
+            <li ng-repeat="food in foods | orderByPriority | filter:search | orderBy:'name'" ng-class="{odd: $odd}"><img class="user-image" ng-src="{{food.image}}"/>{{food.name}}<span><a href="#/edit/{{food.$id}}"><i class="fa fa-edit"></i></a></span></li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
