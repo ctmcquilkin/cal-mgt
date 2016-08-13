@@ -1,12 +1,12 @@
   <div class="container" ng-controller="addFoodController">
 
-      <h1 class="headline">Kale on 6/17/16</h1> <!-- need to make number dynamic to match value clicked on -->
+      <h1 class="headline">{{food.name}}</h1> <!-- need to make number dynamic to match value clicked on -->
       <div class="block">
       <input type="text" ng-model="newMinutes" class="search" placeholder="Servings" /> <!-- need to make number dynamic to match value clicked on -->
       <button ng-click="addActivity()" class='activity'>Add</button>
       <button ng-click="addActivity()" class='secondary'>Back</button>
       </div>
-      <a href="#" class="btn btn-primary btn-lg">Home</a>
-      <a href="#food" class="btn btn-danger btn-lg">Food</a>
+      <a href="#">Home</a>
+      <a href="#food">Food</a>
 
   </div>

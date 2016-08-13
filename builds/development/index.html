@@ -2,49 +2,18 @@
 <html >
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=0, initial-scale=1.0">
     <title>Food list</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-<!--     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'> -->
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css'>
   </head>
   <body ng-app="eatRight">
-
-    <header class="ca-header eader-top clearfix" ng-controller="AuthCtrl">
-      <div id="ca-logo"><a ui-sref="landing-page"><img src="img/logo-placeholder.svg" alt="Logo"></a></div>
-      <nav class="ca-main-nav">
-        <form id="auth" ng-hide="auth.user">
-          <input type="text" ng-model="email" class="search" placeholder="email" />
-          <input type="password" ng-model="password" class="search" placeholder="password" />
-          <button ng-click="signIn()">Sign in</button>
-        </form>
-        <span id="signedIn" ng-show="auth.user">
-          <span ng-show="auth.user.name">Hi {{auth.user.name}}!</span>
-          Signed in as {{auth.user.email}} &nbsp;
-          <button ng-click="auth.$logout()">Sign Out</button>
-        </span>
-      </nav>
-    </header>
-
-<!--     <nav role="navigation" class="header-top clearfix" ng-controller="AuthCtrl">
+    <div class="header-top clearfix">
       <a href="#"><span>Logo Goes Here</span></a>
-            <form id="auth" ng-hide="auth.user">
-              <input type="text" ng-model="email" class="search" placeholder="email" />
-              <input type="password" ng-model="password" class="search" placeholder="password" />
-              <button ng-click="signIn()">Sign in</button>
-            </form>
-      <span class="right">
-        <span ng-show="auth.user">
-          <span ng-show="auth.user.name">Hi {{auth.user.name}}!</span>
-          Signed in as {{auth.user.email}}
-          <button ng-click="auth.$logout()">Sign Out</button>
-        </span>
-      </span>
-    </nav> -->
-<!--     <div class="header-top clearfix">
-      <a href="#"><span>Logo Goes Here</span></a>
-      <span class="right"><a href="#"><span>Menu Toggle Goes Here</span></a></span>
-    </div> -->
+      <span class="right"><button ng-if="auth.user" ng-click="auth.$logout()">Sign out</button><a href="#">
+        <span>Menu</span></a></span>
+    </div>
 <div>
   <div class="page {{ pageClass }}" ng-view></div>
 

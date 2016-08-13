@@ -70,6 +70,7 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
   '$scope', '$rootScope', '$firebaseAuth', function($scope, $rootScope, $firebaseAuth) {
     var ref = new Firebase('https://eat-right.firebaseio.com/favoritelist/');
     $rootScope.auth = $firebaseAuth(ref);
+    $scope.signInVisible = false;
     
     $scope.signIn = function () {
       $rootScope.auth.$login('password', {
@@ -96,6 +97,7 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
           $rootScope.alert.message = '';
         } else {
           $rootScope.alert.class = 'danger';
+          console.log(error);
           $rootScope.alert.message = 'The username and password combination you entered is invalid.';
         }
       });
@@ -111,6 +113,7 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
 
 .controller('CreateCtrl', function($scope, $location, $timeout, Foods) {
   $scope.pageClass = 'page-add-food';
+  $scope.newFood = $location.path() === '/new';
   $scope.save = function() {
     Foods.$add($scope.food, function() {
       $timeout(function() { $location.path('/'); });
@@ -120,7 +123,7 @@ Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) 
 
 .controller('EditCtrl',
   function($scope, $location, $routeParams, $firebase, fbURL) {
-    $scope.pageClass = 'page-activity';
+    $scope.pageClass = 'page-edit';
     var foodUrl = fbURL + $routeParams.foodId;
     $scope.food = $firebase(new Firebase(foodUrl));
 
